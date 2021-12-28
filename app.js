@@ -16,5 +16,9 @@ app.use(express.static('public'));
 app.use(userRoutes);
 
 db.connectToDatabase().then(function () {
-  app.listen(3000);
+  console.log('Connected to database!');
+
+  app.listen(3000, function () {
+    console.log('Listening on port 3000!');
+  });
 });
