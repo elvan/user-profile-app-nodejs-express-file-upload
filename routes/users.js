@@ -18,7 +18,17 @@ const upload = multer({
 });
 
 router.get('/', function (req, res) {
-  res.render('profiles');
+  db.getDb()
+    .collection('users')
+    .find({})
+    .toArray(function (err, users) {
+      if (err) {
+        console.log(err);
+        return res.sendStatus(500);
+      }
+
+      res.render('profiles', { users });
+    });
 });
 
 router.get('/new-user', function (req, res) {
